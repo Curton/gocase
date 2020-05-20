@@ -3,5 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello World")
+	s := ""
+	b := []byte(s)
+	fmt.Print(len(b))
+
 }
