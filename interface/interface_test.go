@@ -17,3 +17,12 @@ func TestInterface(t *testing.T) {
 	i = true
 	fmt.Println(reflect.TypeOf(i))
 }
+
+// ha ha
+func TestSum(t *testing.T) {
+	sum := 0
+	for i := 1; i <= 100; i++ {
+		sum += i
+	}
+	fmt.Println(sum)
+}
