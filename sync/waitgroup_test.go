@@ -11,8 +11,8 @@ func TestWaitGroup(t *testing.T) {
 	var wg sync.WaitGroup
 
 	for i := 0; i < 10; i++ {
-		wg.Add(1)
 		// start new goroutine
+		wg.Add(1)
 		go func(i int) {
 			defer wg.Done()
 			time.Sleep(time.Millisecond * time.Duration(i))
