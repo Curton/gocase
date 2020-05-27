@@ -1,19 +1,16 @@
 package gopool
 
 import (
-	"fmt"
+	"strconv"
 	"sync"
-	"time"
 )
 
-func DemoFunc() {
+func DemoFunc(v int) {
 	// do sth
-	time.Sleep(time.Millisecond * time.Duration(10))
-	fmt.Println("hello")
+	strconv.Itoa(v)
 }
 
 func SimplestPool() {
-	start := time.Now()
 	wg := new(sync.WaitGroup)
 	dataCh := make(chan int, 100)
 
@@ -23,16 +20,31 @@ func SimplestPool() {
 			defer wg.Done()
 			// accept dataCh from dataCh
 			for v := range dataCh {
-				fmt.Printf("goroutine[%v]: %v\r\n", n, v)
+				// time.Sleep(time.Microsecond * 100)
+				// fmt.Printf("goroutine[%v]: %v\r\n", n, v)
+				DemoFunc(v)
 			}
 		}(goId)
 	}
 
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 100000; i++ {
 		dataCh <- i
 	}
 	close(dataCh)
 	wg.Wait()
-	end := time.Now()
-	fmt.Println(end.Sub(start))
+}
+
+func NoPool() {
+	wg := new(sync.WaitGroup)
+
+	for i := 0; i < 100000; i++ {
+		wg.Add(1)
+		go func(n int) {
+			defer wg.Done()
+			// time.Sleep(time.Microsecond * 100)
+			//fmt.Println("goroutine", n)
+			DemoFunc(n)
+		}(i)
+	}
+	wg.Wait()
 }
