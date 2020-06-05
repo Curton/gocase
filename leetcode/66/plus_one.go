@@ -32,7 +32,7 @@ func PlusOne(digits []int) []int {
 }
 
 // reference
-func plusOne(digits []int) []int {
+func PlusOne2(digits []int) []int {
 	var n int = len(digits)
 	for i := n - 1; i > -1; i-- {
 		if digits[i] < 9 {
