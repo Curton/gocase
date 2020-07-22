@@ -34,3 +34,21 @@ func Test(t *testing.T) {
 
 	time.Sleep(time.Hour)
 }
+
+func Test2(t *testing.T) {
+	ch := make(chan bool)
+
+	go func() {
+		defer fmt.Println("go routine exit")
+		for b := range ch {
+			fmt.Println("received from ch ", b)
+			return
+		}
+	}()
+
+	ch <- true
+
+	close(ch) // will send inf false to chan, A closed channel is always available for read
+
+	time.Sleep(time.Hour)
+}
