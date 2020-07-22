@@ -15,8 +15,7 @@ func Append(b []byte) []byte {
 	if b != nil && len(b) == 0 {
 		return []byte{}
 	}
-	c := append([]byte(nil), b...)
-	return c
+	return append([]byte(nil), b...)
 }
 
 // append to a pre-allocated slice
@@ -25,11 +24,9 @@ func Append2(b []byte) []byte {
 		return nil
 	}
 	c := make([]byte, 0, len(b))
-	c = append(c, b...)
-	return c
+	return append(c, b...)
 }
 
 func Append3(b []byte) []byte {
-	c := append(b[:0:0], b...)
-	return c
+	return append(b[:0:0], b...)
 }
